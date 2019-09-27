@@ -1,6 +1,5 @@
 # CPP-Program
-A few set of C++ programs 
-This set includes:
+A few set of C++ programs. This set includes:
  1. 3 times print hello world using for loop
  2. Circulararray
  3. Concatenate two strings
