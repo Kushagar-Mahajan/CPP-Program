@@ -11,3 +11,6 @@ A few set of C++ programs. This set includes:
  9. Merge two arrays
  10. Print array element in a loop
  11. Tic-tac-toe human game
+### How to compile?
+Simply enter the command below in a Terminal:
+`g++ -o <Excutable file name> <File's name(including .cpp)>`
