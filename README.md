@@ -9,5 +9,8 @@ A few set of C++ programs. This set includes:
  7. Infinite loop for hello world
  8. Main program for finding speed
  9. Merge two arrays
- 10.Print array element in a loop
- 11.Tic-tac-toe human game
+ 10. Print array element in a loop
+ 11. Tic-tac-toe human game
+### How to compile?
+Simply enter this command below in a Terminal:
+`g++ -o <Excutable_file_name> <File's_name(including_.cpp)>`
