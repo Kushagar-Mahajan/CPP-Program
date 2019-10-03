@@ -10,7 +10,7 @@ main()
         cout<<"Enter the size of array AR n"<<endl;
         cin>>n;
  
-        printf("Enter the elements of the array n");
+        printf("Enter the elements of the array \n");
         for (i = 0; i < n; i++)
         {
             cin>>ARR[i];
