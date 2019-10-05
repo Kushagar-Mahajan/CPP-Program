@@ -6,7 +6,8 @@ char square[10] = {'o','1','2','3','4','5','6','7','8','9'};
 
 int checkwin();
 void board();
-
+int checkdraw();
+void update_state(int state[][3]);//used in checkdraw function indicates which places belong to either player 
 int main()
 {
 	int player = 1,i,choice;
@@ -57,6 +58,7 @@ int main()
 			cin.ignore();
 			cin.get();
 		}
+		if ( i = checkdraw() )
 		i=checkwin();
 
 		player++;
@@ -116,6 +118,63 @@ int checkwin()
 		return -1;
 }
 
+/*******************************************************************
+FUNCTION TO DECIDE WHETHER THE GAME IS DRAW OR NOT BEFORE END OF THE GAME
+IN FACT , THIS FUNCTION CALCULATES THE CHANCE FOR EVERY PLAYER TO WIN;
+AND IF THERE'S NO CHANCES , THE FUNCTION PREVENTS GOING AHEAD AND IT 
+QUICKLY ENDS THE GAME WITH DRAW MESSAGE SHOWING THAT THERE'S NO WINNER
+-1 IS RETURNED WHEN THE GAME IS STILL IN PROGRESS
+0 FOR WHEN THE GAME IS OVER WITHOUT ANY RESULT , DRAW IN FACT
+*********************************************************************/
+int checkdraw(){
+	int chances = 0;
+	size_t i , j;
+	int state[10][3] = {0};
+	update_state(state);
+	int sums[8][3] = {0};
+	sums[0][1] = state[1][1] + state[2][1] + state[3][1];
+	sums[0][2] = state[1][2] + state[2][2] + state[3][2];
+	sums[1][1] = state[4][1] + state[5][1] + state[6][1];
+	sums[1][2] = state[4][2] + state[5][2] + state[6][2];
+	sums[2][1] = state[7][1] + state[8][1] + state[9][1];
+	sums[2][2] = state[7][2] + state[8][2] + state[9][2];
+	sums[3][1] = state[1][1] + state[4][1] + state[7][1];
+	sums[3][2] = state[1][2] + state[4][2] + state[7][2];
+	sums[4][1] = state[2][1] + state[5][1] + state[8][1];
+	sums[4][2] = state[2][2] + state[5][2] + state[8][2];
+	sums[5][1] = state[3][1] + state[6][1] + state[9][1];
+	sums[5][2] = state[3][2] + state[6][2] + state[9][2];
+	sums[6][1] = state[1][1] + state[5][1] + state[9][1];
+	sums[6][2] = state[1][2] + state[5][2] + state[9][2];
+	sums[7][1] = state[3][1] + state[5][1] + state[7][1];
+	sums[7][2] = state[3][2] + state[5][2] + state[7][2];
+	for ( i = 0 ; i < 8 ; i++ ) {
+		if ( sums[i][1] == 0 || sums[i][2] == 0 ){
+			chances++;break;
+		}
+	}
+	if ( !chances )
+		return 0;
+	return -1;
+}
+
+/**********************************************************************
+FUNCTION TO UPDATE THE STATE OF THE BOARD
+STATE INDICATES THAT WE KNOW THAT WHICH PLACE BELONG TO WHICH PLAYER
+**********************************************************************/
+void update_state( int state[][3] ) {
+	size_t i;
+	for ( i = 1 ; i < 10 ; i++ ) {
+		switch( square[i] ) {
+			case 'X':
+			state[i][1] = 1;break;
+			case 'O':
+			state[i][2] = 2;break;
+			default:
+			break;
+		}
+	} 
+}
 
 /*******************************************************************
      FUNCTION TO DRAW BOARD OF TIC TAC TOE WITH PLAYERS MARK
